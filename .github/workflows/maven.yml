@@ -14,9 +14,14 @@ on:
   pull_request:
     branches: [ "master" ]
 
+permissions:
+  contents: read
+  id-token: write
+  actions: read
+  security-events: write  # ✅ Allows submitting the dependency graph
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -28,8 +33,6 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-      env:
-        NODE_TLS_REJECT_UNAUTHORIZED: 0  
 
     - name: Add Maven to PATH
       run: |
