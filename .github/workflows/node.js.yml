@@ -26,6 +26,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+      env:
+        NODE_TLS_REJECT_UNAUTHORIZED: 0
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
