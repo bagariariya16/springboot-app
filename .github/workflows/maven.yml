@@ -32,6 +32,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+      env:
+        NODE_TLS_REJECT_UNAUTHORIZED: 0  
 
     - name: Add Maven to PATH
       run: |
