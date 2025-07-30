@@ -30,10 +30,10 @@ jobs:
       env:
         NODE_TLS_REJECT_UNAUTHORIZED: 0  
         
-    - name: Setup Maven
-      uses: s4u/setup-maven-action@v1
+    - name: Setup Maven Action
+      uses: s4u/setup-maven-action@v1.15.0
       with:
-        maven-version: '3.9.6'
+        maven-version: '3.9.9'
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
