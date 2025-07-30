@@ -29,6 +29,12 @@ jobs:
         cache: maven
       env:
         NODE_TLS_REJECT_UNAUTHORIZED: 0  
+        
+    - name: Setup Maven (if not pre-installed)
+      uses: stCarolas/setup-maven@v3
+      with:
+        maven-version: '3.8.5'
+        
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
