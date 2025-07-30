@@ -22,19 +22,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17 and enable Maven cache
+      # Disable setup-java cache to avoid legacy cache actions
+      - name: Set up JDK 17 (without cache)
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: maven
+          cache: none
 
-      - name: Full Maven setup (checkout, Java, cache, Maven tool)
+      - name: Complete Maven environment setup
         uses: s4u/setup-maven-action@v1.15.0
         with:
           maven-version: '3.9.9'
+          cache-enabled: true
+          # optionally fine-tune cache-prefix or path if needed
 
-      - name: (Optional) Additional manual Maven cache step
+      - name: (Optional) Additional manual cache step
         uses: actions/cache@v4
         with:
           path: ${{ runner.os == 'Windows' && format('{0}\\.m2\\repository', env.USERPROFILE) || '~/.m2/repository' }}
@@ -45,6 +48,7 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Submit dependency graph for Dependabot
+      - name: Update dependency graph
         uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+
 
