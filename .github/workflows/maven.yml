@@ -37,10 +37,11 @@ jobs:
 
     - name: Add Maven to PATH
       run: |
-        echo "Adding Maven to PATH"
-        echo "##[add-path]C:\\apache-maven-3.9.11\\bin"
+        echo "Adding Maven to PATH..."
+        $env:Path += ";C:\apache-maven-3.9.11\bin"
         mvn -version
-      shell: powershell
+      shell: pwsh
+
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
